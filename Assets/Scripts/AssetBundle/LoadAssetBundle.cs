@@ -6,31 +6,31 @@ public class LoadAssetBundle : MonoBehaviour
 {
     public string bundleName;
     public string assetName;
-    string path;
-    AssetBundle bundle;
+    private string _path;
+    private AssetBundle _bundle;
     IEnumerator Start()
     {
-        path = System.IO.Path.Combine(Application.streamingAssetsPath, bundleName);
-        Debug.Log("Loading AssetBundle from path: " + path);
+        _path = System.IO.Path.Combine(Application.streamingAssetsPath, bundleName);
+        Debug.Log("Loading AssetBundle from path: " + _path);
 
-        if (!System.IO.File.Exists(path))
+        if (!System.IO.File.Exists(_path))
         {
-            Debug.LogError("AssetBundle file not found at path: " + path);
+            Debug.LogError("AssetBundle file not found at path: " + _path);
             yield break;
         }
 
-        AssetBundleCreateRequest bundleRequest = AssetBundle.LoadFromFileAsync(path);
+        AssetBundleCreateRequest bundleRequest = AssetBundle.LoadFromFileAsync(_path);
         yield return bundleRequest;
 
-        bundle = bundleRequest.assetBundle;
-        if (bundle == null)
+        _bundle = bundleRequest.assetBundle;
+        if (_bundle == null)
         {
-            Debug.LogError("Failed to load AssetBundle from path: " + path);
+            Debug.LogError("Failed to load AssetBundle from path: " + _path);
             yield break;
         }
         Debug.Log("Successfully loaded AssetBundle: " + bundleName);
 
-        AssetBundleRequest assetRequest = bundle.LoadAssetAsync<GameObject>(assetName);
+        AssetBundleRequest assetRequest = _bundle.LoadAssetAsync<GameObject>(assetName);
         yield return assetRequest;
 
         GameObject asset = assetRequest.asset as GameObject;
@@ -44,6 +44,6 @@ public class LoadAssetBundle : MonoBehaviour
             Debug.LogError("Failed to load asset from AssetBundle: " + assetName);
         }
 
-        bundle.Unload(false);
+        _bundle.Unload(false);
     }     
 }
