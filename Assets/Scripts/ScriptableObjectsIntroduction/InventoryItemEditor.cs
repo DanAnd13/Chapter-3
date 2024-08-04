@@ -7,7 +7,7 @@ public class InventoryItemEditor : EditorWindow
 {
 
     public InventoryItemList inventoryItemList;
-    private int viewIndex = 1;
+    private int _viewIndex = 1;
 
     [MenuItem("Window/Inventory Item Editor %#e")]
     static void Init()
@@ -73,15 +73,15 @@ public class InventoryItemEditor : EditorWindow
 
             if (GUILayout.Button("Prev", GUILayout.ExpandWidth(false)))
             {
-                if (viewIndex > 1)
-                    viewIndex--;
+                if (_viewIndex > 1)
+                    _viewIndex--;
             }
             GUILayout.Space(5);
             if (GUILayout.Button("Next", GUILayout.ExpandWidth(false)))
             {
-                if (viewIndex < inventoryItemList.itemList.Count)
+                if (_viewIndex < inventoryItemList.itemList.Count)
                 {
-                    viewIndex++;
+                    _viewIndex++;
                 }
             }
 
@@ -93,7 +93,7 @@ public class InventoryItemEditor : EditorWindow
             }
             if (GUILayout.Button("Delete Item", GUILayout.ExpandWidth(false)))
             {
-                DeleteItem(viewIndex - 1);
+                DeleteItem(_viewIndex - 1);
             }
 
             GUILayout.EndHorizontal();
@@ -102,29 +102,29 @@ public class InventoryItemEditor : EditorWindow
             if (inventoryItemList.itemList.Count > 0)
             {
                 GUILayout.BeginHorizontal();
-                viewIndex = Mathf.Clamp(EditorGUILayout.IntField("Current Item", viewIndex, GUILayout.ExpandWidth(false)), 1, inventoryItemList.itemList.Count);
+                _viewIndex = Mathf.Clamp(EditorGUILayout.IntField("Current Item", _viewIndex, GUILayout.ExpandWidth(false)), 1, inventoryItemList.itemList.Count);
                 //Mathf.Clamp (viewIndex, 1, inventoryItemList.itemList.Count);
                 EditorGUILayout.LabelField("of   " + inventoryItemList.itemList.Count.ToString() + "  items", "", GUILayout.ExpandWidth(false));
                 GUILayout.EndHorizontal();
 
-                inventoryItemList.itemList[viewIndex - 1].itemName = EditorGUILayout.TextField("Item Name", inventoryItemList.itemList[viewIndex - 1].itemName as string);
-                inventoryItemList.itemList[viewIndex - 1].itemIcon = EditorGUILayout.ObjectField("Item Icon", inventoryItemList.itemList[viewIndex - 1].itemIcon, typeof(Texture2D), false) as Texture2D;
-                inventoryItemList.itemList[viewIndex - 1].itemObject = EditorGUILayout.ObjectField("Item Object", inventoryItemList.itemList[viewIndex - 1].itemObject, typeof(Rigidbody), false) as Rigidbody;
+                inventoryItemList.itemList[_viewIndex - 1].itemName = EditorGUILayout.TextField("Item Name", inventoryItemList.itemList[_viewIndex - 1].itemName as string);
+                inventoryItemList.itemList[_viewIndex - 1].itemIcon = EditorGUILayout.ObjectField("Item Icon", inventoryItemList.itemList[_viewIndex - 1].itemIcon, typeof(Texture2D), false) as Texture2D;
+                inventoryItemList.itemList[_viewIndex - 1].itemObject = EditorGUILayout.ObjectField("Item Object", inventoryItemList.itemList[_viewIndex - 1].itemObject, typeof(Rigidbody), false) as Rigidbody;
 
                 GUILayout.Space(10);
 
                 GUILayout.BeginHorizontal();
-                inventoryItemList.itemList[viewIndex - 1].isUnique = (bool)EditorGUILayout.Toggle("Unique", inventoryItemList.itemList[viewIndex - 1].isUnique, GUILayout.ExpandWidth(false));
-                inventoryItemList.itemList[viewIndex - 1].isIndestructible = (bool)EditorGUILayout.Toggle("Indestructable", inventoryItemList.itemList[viewIndex - 1].isIndestructible, GUILayout.ExpandWidth(false));
-                inventoryItemList.itemList[viewIndex - 1].isQuestItem = (bool)EditorGUILayout.Toggle("QuestItem", inventoryItemList.itemList[viewIndex - 1].isQuestItem, GUILayout.ExpandWidth(false));
+                inventoryItemList.itemList[_viewIndex - 1].isUnique = (bool)EditorGUILayout.Toggle("Unique", inventoryItemList.itemList[_viewIndex - 1].isUnique, GUILayout.ExpandWidth(false));
+                inventoryItemList.itemList[_viewIndex - 1].isIndestructible = (bool)EditorGUILayout.Toggle("Indestructable", inventoryItemList.itemList[_viewIndex - 1].isIndestructible, GUILayout.ExpandWidth(false));
+                inventoryItemList.itemList[_viewIndex - 1].isQuestItem = (bool)EditorGUILayout.Toggle("QuestItem", inventoryItemList.itemList[_viewIndex - 1].isQuestItem, GUILayout.ExpandWidth(false));
                 GUILayout.EndHorizontal();
 
                 GUILayout.Space(10);
 
                 GUILayout.BeginHorizontal();
-                inventoryItemList.itemList[viewIndex - 1].isStackable = (bool)EditorGUILayout.Toggle("Stackable ", inventoryItemList.itemList[viewIndex - 1].isStackable, GUILayout.ExpandWidth(false));
-                inventoryItemList.itemList[viewIndex - 1].destroyOnUse = (bool)EditorGUILayout.Toggle("Destroy On Use", inventoryItemList.itemList[viewIndex - 1].destroyOnUse, GUILayout.ExpandWidth(false));
-                inventoryItemList.itemList[viewIndex - 1].encumbranceValue = EditorGUILayout.FloatField("Encumberance", inventoryItemList.itemList[viewIndex - 1].encumbranceValue, GUILayout.ExpandWidth(false));
+                inventoryItemList.itemList[_viewIndex - 1].isStackable = (bool)EditorGUILayout.Toggle("Stackable ", inventoryItemList.itemList[_viewIndex - 1].isStackable, GUILayout.ExpandWidth(false));
+                inventoryItemList.itemList[_viewIndex - 1].destroyOnUse = (bool)EditorGUILayout.Toggle("Destroy On Use", inventoryItemList.itemList[_viewIndex - 1].destroyOnUse, GUILayout.ExpandWidth(false));
+                inventoryItemList.itemList[_viewIndex - 1].encumbranceValue = EditorGUILayout.FloatField("Encumberance", inventoryItemList.itemList[_viewIndex - 1].encumbranceValue, GUILayout.ExpandWidth(false));
                 GUILayout.EndHorizontal();
 
                 GUILayout.Space(10);
@@ -146,7 +146,7 @@ public class InventoryItemEditor : EditorWindow
         // There is no overwrite protection here!
         // There is No "Are you sure you want to overwrite your existing object?" if it exists.
         // This should probably get a string from the user to create a new name and pass it ...
-        viewIndex = 1;
+        _viewIndex = 1;
         inventoryItemList = CreateInventoryItemList.Create();
         if (inventoryItemList)
         {
@@ -158,10 +158,10 @@ public class InventoryItemEditor : EditorWindow
 
     void OpenItemList()
     {
-        string absPath = EditorUtility.OpenFilePanel("Select Inventory Item List", "", "");
-        if (absPath.StartsWith(Application.dataPath))
+        string _absPath = EditorUtility.OpenFilePanel("Select Inventory Item List", "", "");
+        if (_absPath.StartsWith(Application.dataPath))
         {
-            string relPath = absPath.Substring(Application.dataPath.Length - "Assets".Length);
+            string relPath = _absPath.Substring(Application.dataPath.Length - "Assets".Length);
             inventoryItemList = AssetDatabase.LoadAssetAtPath(relPath, typeof(InventoryItemList)) as InventoryItemList;
             if (inventoryItemList.itemList == null)
                 inventoryItemList.itemList = new List<InventoryItems>();
@@ -177,7 +177,7 @@ public class InventoryItemEditor : EditorWindow
         InventoryItems newItem = new InventoryItems();
         newItem.itemName = "New Item";
         inventoryItemList.itemList.Add(newItem);
-        viewIndex = inventoryItemList.itemList.Count;
+        _viewIndex = inventoryItemList.itemList.Count;
     }
 
     void DeleteItem(int index)

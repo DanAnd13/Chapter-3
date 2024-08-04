@@ -13,21 +13,30 @@ MonoBehaviour:
   m_Name: InventoryItemList
   m_EditorClassIdentifier: 
   itemList:
-  - itemName: First
-    itemIcon: {fileID: 2800000, guid: a2badf5f2370f084f875e68939cde251, type: 3}
+  - itemName: 
+    itemIcon: {fileID: 0}
     itemObject: {fileID: 0}
-    isUnique: 1
+    isUnique: 0
     isIndestructible: 0
     isQuestItem: 0
     isStackable: 0
-    destroyOnUse: 1
+    destroyOnUse: 0
     encumbranceValue: 0
-  - itemName: Second
-    itemIcon: {fileID: 10910, guid: 0000000000000000f000000000000000, type: 0}
+  - itemName: 
+    itemIcon: {fileID: 0}
     itemObject: {fileID: 0}
     isUnique: 0
-    isIndestructible: 1
+    isIndestructible: 0
     isQuestItem: 0
-    isStackable: 1
+    isStackable: 0
+    destroyOnUse: 0
+    encumbranceValue: 0
+  - itemName: 
+    itemIcon: {fileID: 0}
+    itemObject: {fileID: 0}
+    isUnique: 0
+    isIndestructible: 0
+    isQuestItem: 0
+    isStackable: 0
     destroyOnUse: 0
     encumbranceValue: 0

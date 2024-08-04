@@ -6,11 +6,11 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 10.0F;
     public float rotationSpeed = 100.0F;
-    void Update()
+    private void Update()
     {
         MovingAndRotation();
     }
-    void MovingAndRotation()
+    private void MovingAndRotation()
     {
         float translation = Input.GetAxis("Vertical") * speed;
         float rotation = Input.GetAxis("Horizontal") * rotationSpeed;

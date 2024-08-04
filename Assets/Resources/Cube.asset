@@ -9,7 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07754bfe65c79084d94d7eb2a074a92e, type: 3}
-  m_Name: Inventory
+  m_Script: {fileID: 11500000, guid: fd31f308d00e1d642a5f5f1e2dd9253b, type: 3}
+  m_Name: Cube
   m_EditorClassIdentifier: 
-  _items: []
+  itemName: Cube
+  icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  objectRarity: 0
+  cost: 100
